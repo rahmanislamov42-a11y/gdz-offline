@@ -1,0 +1,30 @@
+
+name: gdz_offline
+description: School assistant with offline textbook catalog and weekly schedule.
+publish_to: 'none'
+
+version: 0.2.0+2
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  image_picker: ^1.1.2
+  shared_preferences: ^2.5.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/catalog.json
+    - assets/textbooks.json
