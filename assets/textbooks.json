@@ -1,0 +1,26 @@
+{
+  "textbooks": [
+    {
+      "id": "algebra_9_2014",
+      "class": 9,
+      "subject": "Алгебра",
+      "title": "Название учебника",
+      "authors": [],
+      "publisher": "",
+      "year": 2014,
+      "isbn": "",
+      "exercises": []
+    },
+    {
+      "id": "algebra_9_2023",
+      "class": 9,
+      "subject": "Алгебра",
+      "title": "Название учебника",
+      "authors": [],
+      "publisher": "",
+      "year": 2023,
+      "isbn": "",
+      "exercises": []
+    }
+  ]
+}
