@@ -35,12 +35,16 @@ jobs:
           test -f gdz_offline_flutter/pubspec.yaml
           test -f gdz_offline_flutter/lib/main.dart
 
-      - name: Copy database files
+      - name: Copy updated application files
         run: |
           mkdir -p gdz_offline_flutter/assets
           mkdir -p gdz_offline_flutter/lib
-          cp assets/textbooks.json gdz_offline_flutter/assets/textbooks.json
+
+          cp lib/main.dart gdz_offline_flutter/lib/main.dart
           cp lib/textbook_database.dart gdz_offline_flutter/lib/textbook_database.dart
+          cp assets/textbooks.json gdz_offline_flutter/assets/textbooks.json
+
+          test -f gdz_offline_flutter/lib/main.dart
 
       - name: Generate Android files
         working-directory: gdz_offline_flutter
