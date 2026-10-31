@@ -52,6 +52,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: gdz_offline_flutter
+        cp pubspec.yaml gdz_offline_flutter/pubspec.yaml
         run: flutter pub get
 
       - name: Build APK
