@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - "gdz_offline_flutter_mvp.zip"
+      - "assets/**"
+      - "lib/**"
       - ".github/workflows/android-build.yml"
 
 jobs:
@@ -31,6 +33,14 @@ jobs:
         run: |
           unzip -q gdz_offline_flutter_mvp.zip
           test -f gdz_offline_flutter/pubspec.yaml
+          test -f gdz_offline_flutter/lib/main.dart
+
+      - name: Copy database files
+        run: |
+          mkdir -p gdz_offline_flutter/assets
+          mkdir -p gdz_offline_flutter/lib
+          cp assets/textbooks.json gdz_offline_flutter/assets/textbooks.json
+          cp lib/textbook_database.dart gdz_offline_flutter/lib/textbook_database.dart
 
       - name: Generate Android files
         working-directory: gdz_offline_flutter
@@ -49,3 +59,9 @@ jobs:
         with:
           name: gdz-offline-apk
           path: gdz_offline_flutter/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload restored project sources
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdz-offline-source
+          path: gdz_offline_flutter/
