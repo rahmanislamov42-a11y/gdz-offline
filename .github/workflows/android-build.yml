@@ -1,0 +1,51 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "gdz_offline_flutter_mvp.zip"
+      - ".github/workflows/android-build.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Extract project
+        run: |
+          unzip -q gdz_offline_flutter_mvp.zip
+          test -f gdz_offline_flutter/pubspec.yaml
+
+      - name: Generate Android files
+        working-directory: gdz_offline_flutter
+        run: flutter create --platforms=android .
+
+      - name: Install dependencies
+        working-directory: gdz_offline_flutter
+        run: flutter pub get
+
+      - name: Build APK
+        working-directory: gdz_offline_flutter
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdz-offline-apk
+          path: gdz_offline_flutter/build/app/outputs/flutter-apk/app-release.apk
